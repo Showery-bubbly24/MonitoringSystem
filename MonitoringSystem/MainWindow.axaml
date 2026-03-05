@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:accesscontrol="using:System.Security.AccessControl"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:diagnostics="using:System.Diagnostics"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MonitoringSystem.MainWindow"
+        x:CompileBindings="False"
+        Title="MonitoringSystem">
+    <Grid Grid.RowDefinitions="0.3*,*,0.5*"
+          ShowGridLines="True">
+		<Grid Grid.Row="0">
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="30">
+				Список процессов
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">	
+            <ListBox Name="processesList">
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="diagnostics:Process">
+						<Border BorderBrush="Black"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="4">
+                            <Grid ColumnDefinitions="0.3*,*,0.4*">
+                                <TextBlock Grid.Column="0"
+                                           Text="{Binding Id}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding ProcessName}"/>
+                                <TextBlock Grid.Column="2"
+                                           Text="{Binding StartTime}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Button Content="Click Please"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Click="GetProcesses_Click"/>
+        </Grid>
+    </Grid>
+</Window>
