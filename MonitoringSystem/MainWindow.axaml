@@ -21,7 +21,7 @@
         <Grid Grid.Row="1">	
             <ListBox Name="processesList">
 				<ListBox.ItemTemplate>
-					<DataTemplate DataType="diagnostics:Process">
+				    <DataTemplate>
 						<Border BorderBrush="Black"
                                 BorderThickness="1"
                                 CornerRadius="4"
@@ -40,7 +40,7 @@
             </ListBox>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Content="Click Please"
+            <Button Content="Kill the selected task"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Click="GetProcesses_Click"/>

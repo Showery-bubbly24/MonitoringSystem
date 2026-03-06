@@ -10,13 +10,29 @@ namespace MonitoringSystem
         public MainWindow()
         {
             InitializeComponent();
+            processesList.ItemsSource = Process.GetProcesses()
+                                        .OrderBy(p => p.ProcessName)
+                                        .ToList();
         }
 
         private void GetProcesses_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            processesList.ItemsSource = Process.GetProcesses()
+            var selectedItem = processesList.SelectedItem as Process;
+
+            if (selectedItem != null)
+            {
+                try
+                {
+                    selectedItem.Kill();
+                    processesList.ItemsSource = Process.GetProcesses()
                                         .OrderBy(p => p.ProcessName)
                                         .ToList();
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
         }
     }
 }
